@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.rog//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/resources.mapper.userMapper">
+
+    <insert id="insertUser" parameterType="weonforall.capstone.news_recommendation.domain.UserVO">
+        INSERT INTO innodb.User (
+            Uid,
+            PushTime
+        ) VALUES (
+            #{uid},
+            #{pushTime}
+        )
+    </insert>
+
+    <select id="getUser" resultType="weonforall.capstone.news_recommendation.domain.UserVO">
+        SELECT *
+        FROM innodb.User
+        WHERE Uid = #{uid}
+    </select>
+</mapper>
