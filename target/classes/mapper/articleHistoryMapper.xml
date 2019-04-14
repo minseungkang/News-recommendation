@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.rog//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/resources.mapper.articleHistoryMapper">
+
+    <insert id="insertArticleHistory" parameterType="weonforall.capstone.news_recommendation.domain.ArticleHistoryVO">
+        INSERT INTO innodb.ArticleHistory (
+            Aid,
+            Uid,
+            Feedback,
+            `Timestamp`,
+            `Read`
+        ) VALUES (
+            #{aid},
+            #{uid},
+            #{feedback},
+            #{timestamp},
+            #{read}
+        )
+    </insert>
+
+    <select id="getArticleHistory" parameterType="map" resultType="weonforall.capstone.news_recommendation.domain.ArticleHistoryVO">
+        SELECT *
+        FROM innodb.ArticleHistory
+        WHERE Aid = #{aid} AND Uid = #{uid}
+    </select>
+
+    <update id="updateArticleHistory" parameterType="weonforall.capstone.news_recommendation.domain.ArticleHistoryVO">
+        UPDATE innodb.ArticleHistory
+        SET Feedback = #{feedback}, `Read` = #{read}
+        WHERE Aid = #{aid} AND Uid = #{uid}
+    </update>
+
+    <select id="getRecommendedArticles" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT a.aid, title, ah.`timestamp`, a.contentPath, a.score, a.url, a.uploadedTimestamp, ah.uid, ah.feedback, ah.`read`
+        FROM innodb.Article a
+                 LEFT OUTER JOIN innodb.ArticleHistory ah
+                                 ON a.aid = ah.Aid
+        WHERE ah.uid = #{uid}
+        ORDER BY ah.`timestamp` DESC
+        LIMIT 10;
+    </select>
+</mapper>
