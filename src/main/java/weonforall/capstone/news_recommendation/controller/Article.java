@@ -36,6 +36,7 @@ public class Article {
         Result result = null;
 
         try {
+            System.out.println("read");
             ArticleVO articleVO = iArticleDAO.getArticle(aid);
             if (articleVO == null) {
                 result = new Result(Status.Key.NOT_EXIST, Status.Obj.ARTICLE);
@@ -66,7 +67,7 @@ public class Article {
 
         Result result = null;
 
-        System.out.println("sss");
+        System.out.println("get");
         if (uid == null) {
             result = new Result(Status.Key.INVALID, Status.Obj.PARAM);
             return result;
@@ -97,6 +98,7 @@ public class Article {
 
     @RequestMapping(value = "/article/feedback", method = RequestMethod.POST)
     public @ResponseBody Result feedback(@RequestBody Map<String, Object> param) {
+        System.out.println("feedback");
         String uid = (String) param.getOrDefault("uid", null);
         Long aid = Integer.toUnsignedLong((int)param.getOrDefault("aid", -1));
         Boolean feedback = (Boolean)param.getOrDefault(("feedback"), null);
