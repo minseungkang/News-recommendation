@@ -32,7 +32,7 @@
   
   * params
     * String uid    // means user's id
-    * String aid    // means article's id
+    * Long aid    // means article's id
   
   * example
     * http://`SERVER-IP`:`PORT`/article/read
@@ -51,7 +51,7 @@
   
   * params
     * String uid        // means user's id
-    * String aid        // means article's id
+    * Long aid        // means article's id
     * Boolean feedback  // means user's feedback
       * true              // user like this article
       * false             // user don't care this article
