@@ -28,6 +28,8 @@
 # .idea/*.iml
 # .idea/modules
 
+# Java
+*.class
 # CMake
 cmake-build-*/
 
