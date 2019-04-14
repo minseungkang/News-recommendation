@@ -7,6 +7,8 @@
 ## Article
 
 * /article/get
+ 	* Type
+	  * GET
   * when you call this API?
     * need to renew User's recommended articles List
   
@@ -20,7 +22,9 @@
     * http://`SERVER-IP`:`PORT`/article/get?uid=usertest00
     
 * /article/read
-  * when you call this API?
+	* Type
+	 	* POST
+	* when you call this API?
     * User's article click Action
     
   * what it does?
@@ -37,6 +41,8 @@
 
 
 * /article/feedback
+  * Type
+	  * POST
   * when you call this API?
     * User's article feedback button click Action
     
@@ -60,8 +66,25 @@
     
  ## User
  
- * /user/getInitialKeywords
+ * /user/initUser
+ 	 * Type
+	 	 * POST
+		 
  	 * when you call this API?
+	   * initialize user
+		 
+	 * what it does?
+	   * make user id and set to Table
+		 
+	 * example
+	 	 * http://`SERVER-IP`:`PORT`/user/initUser
+ 
+ 
+ * /user/getInitialKeywords
+	 * Type
+	 	 * GET
+ 	 
+	 * when you call this API?
 	   * for users initial keyword setting
 		 
 	 * what it does?
@@ -71,9 +94,13 @@
 	   * String uid				// means user's id
 		 
 	 * example
-	 	 * http://`SERVER-IP`:`PORT`/user/getInitialKeywords
+	 	 * http://`SERVER-IP`:`PORT`/user/getInitialKeywords?uid:usertest00
+ 
  
  * /user/initKeyword
+	 * Type
+	 	 * POST
+		 
    * when you call this API?
      * user finished to select some keywords.
    
