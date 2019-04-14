@@ -60,4 +60,12 @@
     
  ## User
  
- * /user
+ * /user/initKeyword
+   * when you call this API?
+     * user finished to select some keywords.
+   
+   * what it does?
+     * registers user's keyword to "User" Table
+    
+   * params
+  
