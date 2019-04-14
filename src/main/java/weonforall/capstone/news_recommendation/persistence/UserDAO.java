@@ -21,4 +21,9 @@ public class UserDAO implements IUserDAO {
     public UserVO getUser(String uid) {
         return sqlSession.selectOne(NAMESPACE + ".getUser", uid);
     }
+
+    @Override
+    public int checkUUid(String uid) {
+        return sqlSession.selectOne(NAMESPACE + ".checkUUid", uid);
+    }
 }

@@ -7,8 +7,8 @@
 
     <insert id="insertUser" parameterType="weonforall.capstone.news_recommendation.domain.UserVO">
         INSERT INTO innodb.User (
-            Uid,
-            PushTime
+            uid,
+            pushTime
         ) VALUES (
             #{uid},
             #{pushTime}
@@ -18,6 +18,12 @@
     <select id="getUser" resultType="weonforall.capstone.news_recommendation.domain.UserVO">
         SELECT *
         FROM innodb.User
-        WHERE Uid = #{uid}
+        WHERE uid = #{uid}
+    </select>
+
+    <select id="checkUUid" resultType="java.lang.Integer">
+        SELECT COUNT(uid)
+        FROM innodb.User
+        WHERE uid = #{uid}
     </select>
 </mapper>

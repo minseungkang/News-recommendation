@@ -9,4 +9,6 @@ public interface IUserDAO {
 
     UserVO getUser(String uid);
 
+    int checkUUid(String uid);
+
 }
