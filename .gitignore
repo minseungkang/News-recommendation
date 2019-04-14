@@ -28,6 +28,9 @@
 # .idea/*.iml
 # .idea/modules
 
+# Spring
+target/
+
 # Java
 *.class
 # CMake
