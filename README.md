@@ -17,7 +17,7 @@
     * String uid    // means user's id
   
   * example
-    * http://`YOUR-IP`:`YOUR-PORT`/article/get?uid=usertest00
+    * http://`SERVER-IP`:`PORT`/article/get?uid=usertest00
     
 * /article/read
   * when you call this API?
@@ -31,7 +31,7 @@
     * String aid    // means article's id
   
   * example
-    * http://`YOUR-IP`:`YOUR-PORT`/article/read
+    * http://`SERVER-IP`:`PORT`/article/read
     * payload
       * {"aid":19,"uid":"usertest00"}
 
@@ -52,13 +52,26 @@
       * null              // no user feedback action for this article
   
   * example
-    * http://`YOUR-IP`:`YOUR-PORT`/article/feedback
+    * http://`SERVER-IP`:`PORT`/article/feedback
     * payload
       * {"aid":19,"uid":"usertest00", "feedback":true}
 
 
     
  ## User
+ 
+ * /user/getInitialKeywords
+ 	 * when you call this API?
+	   * for users initial keyword setting
+		 
+	 * what it does?
+	   * it gives you some keywords
+		 
+	 * params
+	   * String uid				// means user's id
+		 
+	 * example
+	 	 * http://`SERVER-IP`:`PORT`/user/getInitialKeywords
  
  * /user/initKeyword
    * when you call this API?
@@ -68,4 +81,4 @@
      * registers user's keyword to "User" Table
     
    * params
-  
+	 	 * 
