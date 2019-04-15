@@ -7,7 +7,6 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import weonforall.capstone.news_recommendation.controller.User;
 import weonforall.capstone.news_recommendation.domain.UserVO;
 import weonforall.capstone.news_recommendation.enums.Status;
 import weonforall.capstone.news_recommendation.model.Result;
