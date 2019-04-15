@@ -37,15 +37,16 @@ public class Article {
 
         try {
             System.out.println("read");
-            ArticleVO articleVO = iArticleDAO.getArticle(aid);
-            if (articleVO == null) {
-                result = new Result(Status.Key.NOT_EXIST, Status.Obj.ARTICLE);
-                return result;
-            }
 
             UserVO userVO = iUserDAO.getUser(uid);
             if (userVO == null) {
                 result = new Result(Status.Key.NOT_EXIST, Status.Obj.USER);
+                return result;
+            }
+
+            ArticleVO articleVO = iArticleDAO.getArticle(aid);
+            if (articleVO == null) {
+                result = new Result(Status.Key.NOT_EXIST, Status.Obj.ARTICLE);
                 return result;
             }
 
@@ -106,15 +107,15 @@ public class Article {
         Result result = null;
 
         try {
-            ArticleVO articleVO = iArticleDAO.getArticle(aid);
-            if (articleVO == null) {
-                result = new Result(Status.Key.NOT_EXIST, Status.Obj.ARTICLE);
-                return result;
-            }
-
             UserVO userVO = iUserDAO.getUser(uid);
             if(userVO == null) {
                 result = new Result(Status.Key.NOT_EXIST, Status.Obj.USER);
+                return result;
+            }
+
+            ArticleVO articleVO = iArticleDAO.getArticle(aid);
+            if (articleVO == null) {
+                result = new Result(Status.Key.NOT_EXIST, Status.Obj.ARTICLE);
                 return result;
             }
 
