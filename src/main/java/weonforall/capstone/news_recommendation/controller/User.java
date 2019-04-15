@@ -33,7 +33,7 @@ public class User {
         Result result = null;
 
         try {
-
+            System.out.println("/user/initUser");
             String uid = UUID.randomUUID().toString();
 
             int maximumLoopCnt = 100;

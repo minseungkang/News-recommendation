@@ -1,7 +1,5 @@
 package weonforall.capstone.news_recommendation.controller;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import weonforall.capstone.news_recommendation.domain.ArticleHistoryVO;
 import weonforall.capstone.news_recommendation.domain.ArticleVO;
@@ -36,7 +34,8 @@ public class Article {
         Result result = null;
 
         try {
-            System.out.println("read");
+            System.out.println("/article/read");
+            System.out.println(param.toString());
 
             UserVO userVO = iUserDAO.getUser(uid);
             if (userVO == null) {
@@ -68,7 +67,8 @@ public class Article {
 
         Result result = null;
 
-        System.out.println("get");
+        System.out.println("/article/get");
+        System.out.println("uid:"+_uid);
         if (uid == null) {
             result = new Result(Status.Key.INVALID, Status.Obj.PARAM);
             return result;
@@ -99,7 +99,8 @@ public class Article {
 
     @RequestMapping(value = "/article/feedback", method = RequestMethod.POST)
     public @ResponseBody Result feedback(@RequestBody Map<String, Object> param) {
-        System.out.println("feedback");
+        System.out.println("/article/feedback");
+        System.out.println(param.toString());
         String uid = (String) param.getOrDefault("uid", null);
         Long aid = Integer.toUnsignedLong((int)param.getOrDefault("aid", -1));
         Boolean feedback = (Boolean)param.getOrDefault(("feedback"), null);
