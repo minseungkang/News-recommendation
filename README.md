@@ -103,13 +103,13 @@
  
 * /keyword/setKeywords
   * Type
-	 	* POST
+		* POST
 		 
   * when you call this API?
-    * user finished to select some keywords.
+  	* user finished to select some keywords.
    
   * what it does?
-    * registers user's keyword to "User" Table
+  	* registers user's keyword to "User" Table
     
   * params
 	 	* String uid				// means user's id
