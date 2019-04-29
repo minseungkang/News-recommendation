@@ -79,8 +79,8 @@
 	 * example
 	 	 * http://`SERVER-IP`:`PORT`/user/initUser
  
- 
- * /user/getInitialKeywords
+ ## Keyword
+ * /keyword/getInitialKeywords
 	 * Type
 	 	 * GET
  	 
@@ -94,18 +94,22 @@
 	   * String uid				// means user's id
 		 
 	 * example
-	 	 * http://`SERVER-IP`:`PORT`/user/getInitialKeywords?uid:usertest00
+	 	 * http://`SERVER-IP`:`PORT`/keyword/getInitialKeywords?uid:usertest00
  
  
- * /user/initKeyword
-	 * Type
+ * /user/setKeywords
+ 	* Type
 	 	 * POST
 		 
-   * when you call this API?
-     * user finished to select some keywords.
+   	* when you call this API?
+     	* user finished to select some keywords.
    
-   * what it does?
-     * registers user's keyword to "User" Table
+  	* what it does?
+     	* registers user's keyword to "User" Table
     
-   * params
-	 	 * 
+    * params
+	 	 	* String uid				// means user's id
+		 	* ArrayList<String> keywords				// means keyword list selected by user
+	
+		* example
+			* http://`SERVER-IP`:`PORT`/keyword/setKeywords
