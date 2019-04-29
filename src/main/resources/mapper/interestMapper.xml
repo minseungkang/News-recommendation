@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.rog//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/resources.mapper.interestMapper">
+
+    <insert id="insertInterestKeyword" parameterType="weonforall.capstone.news_recommendation.domain.InterestVO">
+        INSERT INTO innodb.Interest (
+            uid,
+            kid
+        ) VALUES (
+            #{uid},
+            #{kid}
+        )
+    </insert>
+
+    <select id="getInterestKeywordList" resultType="weonforall.capstone.news_recommendation.domain.InterestVO">
+        SELECT *
+        FROM innodb.Interest
+        WHERE uid = #{uid}
+    </select>
+
+    <select id="getInterestKeyword" resultType="weonforall.capstone.news_recommendation.domain.InterestVO">
+        SELECT *
+        FROM innodb.Interest
+        WHERE uid = #{uid} AND kid = #{kid}
+    </select>
+
+</mapper>
