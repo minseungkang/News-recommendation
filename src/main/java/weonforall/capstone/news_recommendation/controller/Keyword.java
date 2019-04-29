@@ -16,12 +16,6 @@ import java.util.Map;
 @RestController
 public class Keyword {
     @Inject
-    IArticleHistoryDAO iArticleHistoryDAO;
-
-    @Inject
-    IArticleDAO iArticleDAO;
-
-    @Inject
     IUserDAO userDAO;
 
     @Inject
