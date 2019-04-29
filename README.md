@@ -64,10 +64,10 @@
 
 
     
- ## User
+## User
  
- * /user/initUser
- 	 * Type
+* /user/initUser
+	* Type
 	 	 * POST
 		 
  	 * when you call this API?
@@ -80,32 +80,40 @@
 	 	 * http://`SERVER-IP`:`PORT`/user/initUser
  
  
- * /user/getInitialKeywords
-	 * Type
-	 	 * GET
+ 
+ 
+## Keyword
+ 
+* /keyword/getInitialKeywords
+	* Type
+	 	* GET
  	 
-	 * when you call this API?
-	   * for users initial keyword setting
+	* when you call this API?
+	  * for users initial keyword setting
 		 
-	 * what it does?
-	   * it gives you some keywords
+	* what it does?
+	  * it gives you some keywords
 		 
-	 * params
-	   * String uid				// means user's id
+	* params
+	  * String uid				// means user's id
 		 
-	 * example
-	 	 * http://`SERVER-IP`:`PORT`/user/getInitialKeywords?uid:usertest00
+	* example
+	 	* http://`SERVER-IP`:`PORT`/keyword/getInitialKeywords?uid:usertest00
  
  
- * /user/initKeyword
-	 * Type
-	 	 * POST
+* /keyword/setKeywords
+  	* Type
+		* POST
 		 
-   * when you call this API?
-     * user finished to select some keywords.
+  	* when you call this API?
+  		* user finished to select some keywords.
    
-   * what it does?
-     * registers user's keyword to "User" Table
+  	* what it does?
+  		* registers user's keyword to "User" Table
     
-   * params
-	 	 * 
+  	* params
+	 	* String uid				// means user's id
+		* ArrayList<String> keywords				// means keyword list selected by user
+	
+  	* example
+	  	* http://`SERVER-IP`:`PORT`/keyword/setKeywords
