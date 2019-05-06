@@ -8,10 +8,12 @@
     <insert id="insertUser" parameterType="weonforall.capstone.news_recommendation.domain.UserVO">
         INSERT INTO innodb.User (
             uid,
-            pushTime
+            pushTime,
+            token
         ) VALUES (
             #{uid},
-            #{pushTime}
+            #{pushTime},
+            #{token}
         )
     </insert>
 
@@ -25,5 +27,17 @@
         SELECT COUNT(uid)
         FROM innodb.User
         WHERE uid = #{uid}
+    </select>
+
+    <update id="updateUser" parameterType="weonforall.capstone.news_recommendation.domain.UserVO">
+        UPDATE innodb.User
+        SET pushtime = #{pushTime}, token = #{token}
+        WHERE uid = #{uid}
+    </update>
+
+    <select id="getPushTokens" parameterType="java.sql.Time" resultType="String">
+        SELECT token
+        FROM innodb.User
+        WHERE TIMEDIFF(pushtime, #{_parameter}) = '00:00:00'
     </select>
 </mapper>

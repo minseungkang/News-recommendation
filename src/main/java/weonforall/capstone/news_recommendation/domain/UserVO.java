@@ -23,14 +23,25 @@ public class UserVO {
         this.pushTime = pushTime;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     private String uid;
     private Time pushTime;
+    private String token;
 
     @Override
     public String toString() {
         return "UserVO{" +
                 "uid='" + uid + '\'' +
                 ", pushTime=" + pushTime +
+                ", token=" + token +
                 '}';
     }
+
 }
