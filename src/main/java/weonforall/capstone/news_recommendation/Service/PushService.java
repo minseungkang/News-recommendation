@@ -19,7 +19,7 @@ public class PushService {
     private final String FIREBASE_URL = "http://fcm.googleapis.com/fcm/send";
     private final String AUTHOR_KEY   = "key=AIzaSyCR7n0WcvZiCLjAN81yaAgdelaBWwPuqy0";
     private final String PUSH_TITLE   = "News recommender";
-    private final String PUSH_BODY    = "뉴스가 갱신되었습니다.";
+    private final String PUSH_BODY    = "News Updated.";
     private final String contents = "{\"notification\":{\"body\":" +
             "\"" + PUSH_BODY + "\",\n" +
             "\"title\" : " +
