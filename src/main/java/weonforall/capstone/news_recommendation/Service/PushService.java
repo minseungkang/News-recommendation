@@ -38,7 +38,7 @@ public class PushService {
         // request to Firbase URL
         RestTemplate restTemplate = new RestTemplate();
 
-        // deinfe HTTP headers
+        // define HTTP headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", AUTHOR_KEY);
