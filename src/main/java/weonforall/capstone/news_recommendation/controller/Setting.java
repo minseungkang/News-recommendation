@@ -25,6 +25,7 @@ public class Setting {
 
     @RequestMapping(value = "/setting/setPushTime", method = RequestMethod.POST)
     public @ResponseBody Result setPushTime(@RequestBody Map<String, Object> param) {
+        System.out.println("/setting/setPushTime");
         String uid = (String)param.getOrDefault("uid", null);
         int hour = (int)param.getOrDefault("hour", 9);
         int minute = (int)param.getOrDefault("minute", 0);
@@ -42,7 +43,7 @@ public class Setting {
                 return result;
             }
 
-            if (hour > 24 || hour < 0) {
+            if (hour >= 24 || hour < 0) {
                 result = new Result(Status.Key.INVALID, Status.Obj.PARAM, "hour", hour);
                 return result;
             }
