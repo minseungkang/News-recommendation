@@ -5,6 +5,8 @@ import weonforall.capstone.news_recommendation.domain.ArticleHistoryVO;
 import weonforall.capstone.news_recommendation.domain.ArticleVO;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,17 @@ public class ArticleHistoryDAO implements IArticleHistoryDAO {
     @Override
     public List<ArticleVO> getRecommendedArticles(String uid) {
         return sqlSession.selectList(NAMESPACE + ".getRecommendedArticles", uid);
+    }
+
+    @Override
+    public List<ArticleVO> getRecommendedArticlesByDate(String uid, Timestamp timestamp) {
+
+        Timestamp endTimestamp = new Timestamp(timestamp.getTime() + 86400 * 1000);
+        Map<String, Object> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("startTimestamp", timestamp);
+        params.put("endTimestamp", endTimestamp);
+        return sqlSession.selectList(NAMESPACE + ".getRecommendedArticlesByDate", params);
     }
 
     @Override

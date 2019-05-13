@@ -42,4 +42,14 @@
         ORDER BY ah.`timestamp` DESC
         LIMIT 10;
     </select>
+
+    <select id="getRecommendedArticlesByDate" parameterType="map" resultType="java.util.HashMap">
+        SELECT a.aid, title, ah.`timestamp`, a.contentPath, a.score, a.url, a.uploadedTimestamp, ah.uid, ah.feedback, ah.`read`
+        FROM innodb.Article a
+                 LEFT OUTER JOIN innodb.ArticleHistory ah
+                                 ON a.aid = ah.Aid
+        WHERE ah.uid = #{uid} AND <![CDATA[ah.`timestamp` >= #{startTimestamp} AND ah.`timestamp` < #{endTimestamp}]]>
+        ORDER BY ah.`timestamp` DESC
+        LIMIT 10;
+    </select>
 </mapper>
