@@ -148,8 +148,8 @@
 	 
 	 * params
 	 	* String uid
-		* int hour		// [00~24)
-		* int minute	// (00~60]
+		* int hour		// 00~23
+		* int minute	// 00~55
 	 * example
 	 	 * http://`SERVER-IP`:`PORT`/setting/setPushTime
  
