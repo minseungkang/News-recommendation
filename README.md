@@ -62,7 +62,22 @@
     * payload
       * {"aid":19,"uid":"usertest00", "feedback":true}
 
-
+* /article/getHistory
+ 	* Type
+	  * POST
+  * when you call this API?
+    * need to renew User's recommended articles List by Date
+  
+  * what it does?
+    * Get recent 10 articles in "ArticleHistory" Table
+    
+  * params
+    * String uid    // means user's id
+		* String date 	// yyyyMMdd
+  
+  * example
+    * http://`SERVER-IP`:`PORT`/article/getHistory
+    
     
 ## User
  
@@ -117,3 +132,24 @@
 	
   	* example
 	  	* http://`SERVER-IP`:`PORT`/keyword/setKeywords
+
+
+## Setting
+ 
+* /setting/setPushTime
+	* Type
+	 	 * POST
+		 
+ 	 * when you call this API?
+	   * change user's push time
+		 
+	 * what it does?
+	   * change user's push time
+	 
+	 * params
+	 	* String uid
+		* int hour		// 00~23
+		* int minute	// 00~55
+	 * example
+	 	 * http://`SERVER-IP`:`PORT`/setting/setPushTime
+ 
