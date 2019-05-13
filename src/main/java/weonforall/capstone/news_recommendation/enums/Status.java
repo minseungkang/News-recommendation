@@ -33,6 +33,10 @@ public class Status {
             @Override
             public String toString() { return "keyword"; }
         },
+        TOKEN(16) {
+            @Override
+            public String toString() { return "token"; }
+        },
         PARAM(98) {
             @Override
             public String toString() { return "param"; }
