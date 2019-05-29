@@ -35,11 +35,10 @@ public class Article {
         String uid = (String)param.getOrDefault("uid", null);
         Long aid = (long)param.getOrDefault("aid", -1);
 
-        Result result = null;
+        Result result;
 
         try {
             System.out.println("/article/read");
-            System.out.println(param.toString());
 
             UserVO userVO = iUserDAO.getUser(uid);
             if (userVO == null) {
@@ -69,10 +68,9 @@ public class Article {
     public @ResponseBody Result get(@RequestParam(value = "uid") String _uid) {
         String uid = _uid;
 
-        Result result = null;
+        Result result;
 
         System.out.println("/article/get");
-        System.out.println("uid:"+_uid);
         if (uid == null) {
             result = new Result(Status.Key.INVALID, Status.Obj.PARAM);
             return result;
@@ -105,7 +103,7 @@ public class Article {
         String uid = (String)param.getOrDefault("uid", null);
         String dateStr = (String)param.getOrDefault("date", null);
 
-        Result result = null;
+        Result result;
 
         try {
             UserVO userVO = iUserDAO.getUser(uid);
@@ -115,7 +113,7 @@ public class Article {
             }
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-            Date date = null;
+            Date date;
 
             try {
                 date = simpleDateFormat.parse(dateStr);

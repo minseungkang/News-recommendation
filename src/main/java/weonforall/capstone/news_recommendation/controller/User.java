@@ -16,18 +16,12 @@ import java.util.UUID;
 @RestController
 public class User {
     @Inject
-    IArticleHistoryDAO iArticleHistoryDAO;
-
-    @Inject
-    IArticleDAO iArticleDAO;
-
-    @Inject
     IUserDAO iUserDAO;
 
 
     @RequestMapping(value = "/user/setToken", method = RequestMethod.POST)
     public @ResponseBody Result setToken(@RequestBody Map<String, Object> param) {
-        Result result = null;
+        Result result;
 
         try {
             System.out.println("/user/setToken");
@@ -59,7 +53,7 @@ public class User {
     @RequestMapping(value = "/user/initUser", method = RequestMethod.POST)
     public @ResponseBody Result initUser(@RequestBody Map<String, Object> param) {
 
-        Result result = null;
+        Result result;
 
         try {
             System.out.println("/user/initUser");

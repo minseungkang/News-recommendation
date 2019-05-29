@@ -15,12 +15,6 @@ import java.util.Map;
 @RestController
 public class Setting {
     @Inject
-    IArticleHistoryDAO iArticleHistoryDAO;
-
-    @Inject
-    IArticleDAO iArticleDAO;
-
-    @Inject
     IUserDAO iUserDAO;
 
     @RequestMapping(value = "/setting/setPushTime", method = RequestMethod.POST)
@@ -30,7 +24,7 @@ public class Setting {
         int hour = (int)param.getOrDefault("hour", 9);
         int minute = (int)param.getOrDefault("minute", 0);
 
-        Result result = null;
+        Result result;
         try {
             if (uid == null) {
                 result = new Result(Status.Key.INVALID, Status.Obj.PARAM, "uid", uid);

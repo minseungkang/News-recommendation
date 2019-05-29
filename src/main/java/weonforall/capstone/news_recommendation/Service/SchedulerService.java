@@ -77,7 +77,7 @@ public class SchedulerService {
 
             HttpEntity<String> param = new HttpEntity<>(body, headers);
 
-            String result = restTemplate.postForObject(FIREBASE_URL, param, String.class);
+            restTemplate.postForObject(FIREBASE_URL, param, String.class);
         }
     }
 

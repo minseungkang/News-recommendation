@@ -26,7 +26,7 @@ public class Keyword {
 
     @RequestMapping(value = "/keyword/setKeywords", method = RequestMethod.POST)
     public @ResponseBody Result setKeywords(@RequestBody Map<String, Object> param) {
-        Result result = null;
+        Result result;
 
         try {
             System.out.println("/keyword/setKeyword");
@@ -48,9 +48,6 @@ public class Keyword {
                 result = new Result(Status.Key.NOT_EXIST, Status.Obj.USER);
                 return result;
             }
-
-            //ObjectMapper mapper = new ObjectMapper();
-            //ArrayList<String> keywordList = mapper.readValue(keywordsJson, new TypeReference<ArrayList<String>>(){});
 
             for (String keyword : keywordList) {
                 if (keyword == null) continue;
@@ -80,16 +77,15 @@ public class Keyword {
 
     @RequestMapping(value = "/keyword/getInitialKeywords", method = RequestMethod.GET)
     public @ResponseBody Result getInitialKeywords(@RequestParam(value = "uid") String _uid) {
-        Result result = null;
+        Result result;
         try {
             System.out.println("/keyword/getInitialKeywords");
-            String uid = _uid;
-            if (uid == null) {
+            if (_uid == null) {
                 result = new Result(Status.Key.INVALID, Status.Obj.PARAM);
                 return result;
             }
 
-            if (userDAO.getUser(uid) == null) {
+            if (userDAO.getUser(_uid) == null) {
                 result = new Result(Status.Key.NOT_EXIST, Status.Obj.USER);
                 return result;
             }

@@ -1,7 +1,6 @@
 package weonforall.capstone.news_recommendation.persistence;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import weonforall.capstone.news_recommendation.domain.UserVO;
 
