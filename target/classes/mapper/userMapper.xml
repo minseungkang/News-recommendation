@@ -40,4 +40,10 @@
         FROM innodb.User
         WHERE TIMEDIFF(pushtime, #{_parameter}) = '00:00:00'
     </select>
+
+    <select id="getUidListByPushTime" parameterType="java.sql.Time" resultType="String">
+        SELECT uid
+        FROM innodb.User
+        WHERE TIMEDIFF(pushtime, #{_parameter}) = '00:00:00'
+    </select>
 </mapper>

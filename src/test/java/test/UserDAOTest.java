@@ -16,6 +16,8 @@ import java.sql.Time;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static org.junit.Assert.assertTrue;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:web/WEB-INF/applicationContext.xml"})
@@ -26,34 +28,44 @@ public class UserDAOTest {
 
     @Test
     public void Order1_InsertUser() throws Exception {
-        String uid = UUID.randomUUID().toString();
+        try {
+            String uid = UUID.randomUUID().toString();
 
-        Result result;
-        int maximumLoopCnt = 100;
-        int loopCnt = 0;
-        while (loopCnt < maximumLoopCnt) {
-            uid = UUID.randomUUID().toString();
+            Result result;
+            int maximumLoopCnt = 100;
+            int loopCnt = 0;
+            while (loopCnt < maximumLoopCnt) {
+                uid = UUID.randomUUID().toString();
 
-            // check uid exists in db
-            if (iUserDAO.checkUUid(uid) == 0) break;
-            loopCnt++;
+                // check uid exists in db
+                if (iUserDAO.checkUUid(uid) == 0) break;
+                loopCnt++;
+            }
+
+            if (loopCnt >= maximumLoopCnt) {
+                result = new Result(Status.Key.INVALID, Status.Obj.USER, "uid", uid);
+            }
+
+            UserVO userVO = new UserVO();
+            userVO.setUid(uid);
+            userVO.setPushTime(new Time(0));
+            iUserDAO.insertUser(userVO);
+
+            result = new Result(Status.Key.SUCCEED, Status.Obj.REQUEST, "uservo", userVO);
+            System.out.println(result);
+            assertTrue(true);
+        } catch (Exception e) {
+            assertTrue(false);
         }
-
-        if (loopCnt >= maximumLoopCnt) {
-            result = new Result(Status.Key.INVALID, Status.Obj.USER, "uid", uid);
-        }
-
-        UserVO userVO = new UserVO();
-        userVO.setUid(uid);
-        userVO.setPushTime(new Time(0));
-        iUserDAO.insertUser(userVO);
-
-        result = new Result(Status.Key.SUCCEED, Status.Obj.REQUEST, "uservo", userVO);
-        System.out.println(result);
     }
 
     @Test
     public void Order2_GetUser() throws Exception {
-        System.out.println(iUserDAO.getUser("usertest00"));
+        try {
+            System.out.println(iUserDAO.getUser("usertest00"));
+            assertTrue(true);
+        } catch (Exception e) {
+            assertTrue(false);
+        }
     }
 }

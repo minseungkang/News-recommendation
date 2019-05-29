@@ -14,7 +14,9 @@ import java.sql.Time;
 import java.util.List;
 
 @Service
-public class PushService {
+public class SchedulerService {
+
+    private final Integer ONE_MINUTE = 60000;
 
     private final String FIREBASE_URL = "http://fcm.googleapis.com/fcm/send";
     private final String AUTHOR_KEY   = "key=AIzaSyCR7n0WcvZiCLjAN81yaAgdelaBWwPuqy0";
@@ -25,12 +27,35 @@ public class PushService {
             "\"title\" : " +
             "\"" + PUSH_TITLE + "\"\n" +
             "},\n";
+
+    private final String RECOMMEND_SERVER_URL = "http://13.209.15.142:5555/suggest/";
+
     @Inject
     private IUserDAO userDAO;
 
+    @Scheduled(cron = "0 2/5 * * * *")
+    public void requestScheduler() {
+        long timeLong = System.currentTimeMillis();
+        timeLong = timeLong / 10000 * 10000 + (ONE_MINUTE * 3);
+        Time curTime = new Time(timeLong);
+
+        // request to Firbase URL
+        RestTemplate restTemplate = new RestTemplate();
+
+        // define HTTP headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        List<String> uidList = userDAO.getUidListByPushTime(curTime);
+
+        HttpEntity<String> param = new HttpEntity<>(headers);
+        for (String uid : uidList) {
+            restTemplate.postForObject(RECOMMEND_SERVER_URL + uid, param, String.class);
+        }
+    }
 
     @Scheduled(cron = "0 0/5 * * * *")
-    public void Scheduler() {
+    public void pushScheduler() {
         long timeLong = System.currentTimeMillis();
         timeLong = timeLong / 10000 * 10000;
         Time curTime = new Time(timeLong);

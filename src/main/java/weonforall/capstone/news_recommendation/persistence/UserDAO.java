@@ -38,4 +38,9 @@ public class UserDAO implements IUserDAO {
     public List<String> getPushTokens(Time time) {
         return sqlSession.selectList(NAMESPACE + ".getPushTokens", time);
     }
+
+    @Override
+    public List<String> getUidListByPushTime(Time time) {
+        return sqlSession.selectList(NAMESPACE + ".getUidListByPushTime", time);
+    }
 }

@@ -17,4 +17,6 @@ public interface IUserDAO {
     void updateUser(UserVO userVO);
 
     List<String> getPushTokens(Time time);
+
+    List<String> getUidListByPushTime(Time time);
 }

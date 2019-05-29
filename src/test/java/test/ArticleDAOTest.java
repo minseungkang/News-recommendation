@@ -12,6 +12,8 @@ import weonforall.capstone.news_recommendation.persistence.IArticleDAO;
 
 import java.sql.Timestamp;
 
+import static org.junit.Assert.assertTrue;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:web/WEB-INF/applicationContext.xml"})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -23,23 +25,35 @@ public class ArticleDAOTest {
     @Test
     public void Order1_InsertArticle() throws Exception {
 
-        for (int i = 11 ; i < 20 ; i++) {
-            ArticleVO articleVO = new ArticleVO();
-            articleVO.setTitle("testTitle" + i);
-            articleVO.setContentPath("testPath" + i);
-            articleVO.setUrl("testUrl" + i);
+        try {
+            for (int i = 11; i < 20; i++) {
+                ArticleVO articleVO = new ArticleVO();
+                articleVO.setTitle("testTitle" + i);
+                articleVO.setContentPath("testPath" + i);
+                articleVO.setUrl("testUrl" + i);
 
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            articleVO.setTimestamp(timestamp);
-            articleVO.setUploadedTimestamp(timestamp);
-            articleVO.setScore(10.00);
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                articleVO.setTimestamp(timestamp);
+                articleVO.setUploadedTimestamp(timestamp);
+                articleVO.setScore(10.00);
 
-            iArticleDAO.insertArticle(articleVO);
+                iArticleDAO.insertArticle(articleVO);
+            }
+            assertTrue(true);
+        }
+        catch (Exception e) {
+            assertTrue(false);
         }
     }
 
     @Test
     public void Order2_GetArticle() throws Exception {
-        System.out.println(iArticleDAO.getArticle((long)3));
+        try {
+            System.out.println(iArticleDAO.getArticle((long) 3));
+            assertTrue(true);
+        } catch (Exception e) {
+            assertTrue(false);
+        }
     }
+
 }
