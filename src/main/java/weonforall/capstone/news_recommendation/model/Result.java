@@ -6,6 +6,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Result {
+
+    private String status;
+    private String message;
+    private long timestamp;
+
+    Map<String, Object> data;
+
+    public Result(String _status, String _message, String mapKey, Object _data) {
+        this.data = new HashMap<>();
+        this.status = _status;
+        this.message = _message;
+        this.data.put(mapKey, _data);
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public Result(Status.Key key, Status.Obj obj, String mapKey, Object _data) {
+        this.data = new HashMap<>();
+        this.status = Integer.toString(( key.getValue() * 100 + obj.getValue() ));
+        this.message = key.toString() + obj.toString();
+        this.data.put(mapKey, _data);
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public Result(Status.Key key, Status.Obj obj) {
+        this.status = Integer.toString(( key.getValue() * 100 + obj.getValue() ));
+        this.message = key.toString() + obj.toString();
+        this.data = new HashMap<>();
+        this.timestamp = System.currentTimeMillis();
+    }
+
     public String getStatus() {
         return status;
     }
@@ -29,34 +59,7 @@ public class Result {
         this.timestamp = timestamp;
     }
 
-    private String status;
-    private String message;
-    private long timestamp;
-
-    Map<String, Object> data;
-
     public Result() {
     }
-    public Result(String _status, String _message, String mapKey, Object _data) {
-        this.data = new HashMap<>();
-        this.status = _status;
-        this.message = _message;
-        this.data.put(mapKey, _data);
-        this.timestamp = System.currentTimeMillis();
-    }
 
-    public Result(Status.Key key, Status.Obj obj, String mapKey, Object _data) {
-        this.data = new HashMap<>();
-        this.status = Integer.toString(( key.getValue() * 100 + obj.getValue() ));
-        this.message = key.toString() + obj.toString();
-        this.data.put(mapKey, _data);
-        this.timestamp = System.currentTimeMillis();
-    }
-
-    public Result(Status.Key key, Status.Obj obj) {
-        this.status = Integer.toString(( key.getValue() * 100 + obj.getValue() ));
-        this.message = key.toString() + obj.toString();
-        this.data = new HashMap<>();
-        this.timestamp = System.currentTimeMillis();
-    }
 }
