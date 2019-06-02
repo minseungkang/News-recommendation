@@ -28,7 +28,7 @@ public class Keyword {
     @Inject
     IKeywordDAO keywordDAO;
 
-    private final String RECOMMEND_SERVER_URL = "http://13.125.133.117:5555/suggest/";
+    private final String RECOMMEND_SERVER_URL = "http://ec2-13-209-79-247.ap-northeast-2.compute.amazonaws.com:5555/suggest/";
 
     @RequestMapping(value = "/keyword/setKeywords", method = RequestMethod.POST)
     public @ResponseBody Result setKeywords(@RequestBody Map<String, Object> param) {
