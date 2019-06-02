@@ -1,6 +1,10 @@
 package weonforall.capstone.news_recommendation.controller;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.AsyncRestTemplate;
 import weonforall.capstone.news_recommendation.domain.InterestVO;
 import weonforall.capstone.news_recommendation.domain.KeywordVO;
 import weonforall.capstone.news_recommendation.domain.UserVO;
@@ -23,6 +27,8 @@ public class Keyword {
 
     @Inject
     IKeywordDAO keywordDAO;
+
+    private final String RECOMMEND_SERVER_URL = "http://13.125.133.117:5555/suggest/";
 
     @RequestMapping(value = "/keyword/setKeywords", method = RequestMethod.POST)
     public @ResponseBody Result setKeywords(@RequestBody Map<String, Object> param) {
@@ -66,6 +72,15 @@ public class Keyword {
 
             }
 
+            // recommend API server에 추천 요청.
+            AsyncRestTemplate restTemplate = new AsyncRestTemplate();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<String> httpParam = new HttpEntity<>(headers);
+            restTemplate.postForEntity(RECOMMEND_SERVER_URL + uid, httpParam, String.class);
+
             result = new Result(Status.Key.SUCCEED, Status.Obj.REQUEST);
 
 
@@ -91,7 +106,6 @@ public class Keyword {
             }
 
             List<String> keywordList = keywordDAO.getKeywords();
-            System.out.println(keywordList);
             result = new Result(Status.Key.SUCCEED, Status.Obj.REQUEST, "keywords", keywordList);
 
         } catch (Exception e) {

@@ -4,8 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import weonforall.capstone.news_recommendation.domain.UserVO;
 import weonforall.capstone.news_recommendation.enums.Status;
 import weonforall.capstone.news_recommendation.model.Result;
-import weonforall.capstone.news_recommendation.persistence.IArticleDAO;
-import weonforall.capstone.news_recommendation.persistence.IArticleHistoryDAO;
 import weonforall.capstone.news_recommendation.persistence.IUserDAO;
 
 import javax.inject.Inject;

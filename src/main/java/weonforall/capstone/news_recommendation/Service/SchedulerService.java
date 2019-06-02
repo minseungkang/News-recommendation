@@ -6,7 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.AsyncRestTemplate;
 import weonforall.capstone.news_recommendation.persistence.IUserDAO;
 
 import javax.inject.Inject;
@@ -28,19 +28,19 @@ public class SchedulerService {
             "\"" + PUSH_TITLE + "\"\n" +
             "},\n";
 
-    private final String RECOMMEND_SERVER_URL = "http://13.209.15.142:5555/suggest/";
+    private final String RECOMMEND_SERVER_URL = "http://13.125.133.117:5555/suggest/";
 
     @Inject
     private IUserDAO userDAO;
 
     @Scheduled(cron = "0 2/5 * * * *")
-    public void requestScheduler() {
+public void requestScheduler() {
         long timeLong = System.currentTimeMillis();
         timeLong = timeLong / 10000 * 10000 + (ONE_MINUTE * 3);
         Time curTime = new Time(timeLong);
 
         // request to Firbase URL
-        RestTemplate restTemplate = new RestTemplate();
+        AsyncRestTemplate restTemplate = new AsyncRestTemplate();
 
         // define HTTP headers
         HttpHeaders headers = new HttpHeaders();
@@ -50,7 +50,7 @@ public class SchedulerService {
 
         HttpEntity<String> param = new HttpEntity<>(headers);
         for (String uid : uidList) {
-            restTemplate.postForObject(RECOMMEND_SERVER_URL + uid, param, String.class);
+            restTemplate.postForEntity(RECOMMEND_SERVER_URL + uid, param, String.class);
         }
     }
 
@@ -61,7 +61,7 @@ public class SchedulerService {
         Time curTime = new Time(timeLong);
 
         // request to Firbase URL
-        RestTemplate restTemplate = new RestTemplate();
+        AsyncRestTemplate restTemplate = new AsyncRestTemplate();
 
         // define HTTP headers
         HttpHeaders headers = new HttpHeaders();
@@ -77,7 +77,7 @@ public class SchedulerService {
 
             HttpEntity<String> param = new HttpEntity<>(body, headers);
 
-            restTemplate.postForObject(FIREBASE_URL, param, String.class);
+            restTemplate.postForEntity(FIREBASE_URL, param, String.class);
         }
     }
 
