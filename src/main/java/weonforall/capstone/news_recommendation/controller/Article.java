@@ -84,7 +84,7 @@ public class Article {
             }
 
             List<ArticleVO> articleList = iArticleHistoryDAO.getRecommendedArticles(uid);
-            if (articleList == null) {
+            if (articleList == null || articleList.size() == 0) {
                 result = new Result(Status.Key.NOT_EXIST, Status.Obj.ARTICLE_HISTORY);
                 return result;
             }
