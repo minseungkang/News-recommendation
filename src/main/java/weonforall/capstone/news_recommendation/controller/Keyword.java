@@ -14,6 +14,7 @@ import weonforall.capstone.news_recommendation.persistence.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class Keyword {
     @Inject
     IKeywordDAO keywordDAO;
 
-    private final String RECOMMEND_SERVER_URL = "http://ec2-13-209-79-247.ap-northeast-2.compute.amazonaws.com:5555/suggest/";
+    private final String RECOMMEND_SERVER_URL = "http://13.209.79.247:5555/suggest/";
 
     @RequestMapping(value = "/keyword/setKeywords", method = RequestMethod.POST)
     public @ResponseBody Result setKeywords(@RequestBody Map<String, Object> param) {
@@ -106,6 +107,8 @@ public class Keyword {
             }
 
             List<String> keywordList = keywordDAO.getKeywords();
+            Collections.sort(keywordList);
+
             result = new Result(Status.Key.SUCCEED, Status.Obj.REQUEST, "keywords", keywordList);
 
         } catch (Exception e) {
