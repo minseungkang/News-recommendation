@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.AsyncRestTemplate;
+import org.springframework.web.client.RestClientException;
 import weonforall.capstone.news_recommendation.persistence.IUserDAO;
 
 import javax.inject.Inject;
@@ -28,18 +29,19 @@ public class SchedulerService {
             "\"" + PUSH_TITLE + "\"\n" +
             "},\n";
 
-    private final String RECOMMEND_SERVER_URL = "http://ec2-13-209-79-247.ap-northeast-2.compute.amazonaws.com:5555/suggest/";
-
+    private final String RECOMMEND_SERVER_URL = "http://13.209.79.247:5555/suggest/";
+    private final int TIMEZONE_VALUE = ONE_MINUTE * 60 * 9;
     @Inject
     private IUserDAO userDAO;
 
     @Scheduled(cron = "0 2/5 * * * *")
-public void requestScheduler() {
-        long timeLong = System.currentTimeMillis();
+    public void requestScheduler() {
+        System.out.println("requestScheduler");
+        long timeLong = System.currentTimeMillis() + TIMEZONE_VALUE;
         timeLong = timeLong / 10000 * 10000 + (ONE_MINUTE * 3);
         Time curTime = new Time(timeLong);
+        System.out.println(curTime);
 
-        // request to Firbase URL
         AsyncRestTemplate restTemplate = new AsyncRestTemplate();
 
         // define HTTP headers
@@ -50,15 +52,22 @@ public void requestScheduler() {
 
         HttpEntity<String> param = new HttpEntity<>(headers);
         for (String uid : uidList) {
-            restTemplate.postForEntity(RECOMMEND_SERVER_URL + uid, param, String.class);
+            System.out.println("recommend_request/" + uid);
+            try {
+                restTemplate.postForEntity(RECOMMEND_SERVER_URL + uid, param, String.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Scheduled(cron = "0 0/5 * * * *")
     public void pushScheduler() {
-        long timeLong = System.currentTimeMillis();
+        System.out.println("pushScheduler");
+        long timeLong = System.currentTimeMillis() + TIMEZONE_VALUE;
         timeLong = timeLong / 10000 * 10000;
         Time curTime = new Time(timeLong);
+        System.out.println(curTime);
 
         // request to Firbase URL
         AsyncRestTemplate restTemplate = new AsyncRestTemplate();
@@ -73,6 +82,7 @@ public void requestScheduler() {
 
         // send push notification to each client.
         for (String token : tokenList) {
+            System.out.println("push_noti_request/" + token);
             String body = contents + "\"to\" : " + "\"" + token + "\"\n}";
 
             HttpEntity<String> param = new HttpEntity<>(body, headers);
